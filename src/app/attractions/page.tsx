@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { CityAttractionsCard } from "@/components/CityAttractionsCard";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ interface Attraction {
 
 export default function AttractionsPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [city, setCity] = useState<string>("");
   const [attractions, setAttractions] = useState<Attraction[]>([]);
 
@@ -45,6 +46,16 @@ export default function AttractionsPage() {
           ))}
         </div>
       </div>
+      <button
+        onClick={() => router.push('/')}
+        className="mt-8 px-6 py-3 text-lg font-medium 
+                 bg-primary text-primary-foreground
+                 rounded-lg shadow-md hover:bg-primary/90 focus:outline-none 
+                 focus:ring-2 focus:ring-ring focus:ring-offset-2 
+                 transition duration-200"
+      >
+        Discover more Cities
+      </button>
     </main>
   );
 }
