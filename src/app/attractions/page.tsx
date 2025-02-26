@@ -2,30 +2,23 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { CityAttractionsCard } from "@/components/CityAttractionsCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 interface Attraction {
   name: string;
   description: string;
 }
 
-export default function AttractionsPage() {
+function AttractionsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [city, setCity] = useState<string>("");
+  const city = searchParams.get("city") || "";
   const [attractions, setAttractions] = useState<Attraction[]>([]);
-
-  useEffect(() => {
-    if (searchParams) {
-      setCity(searchParams.get("city") || "");
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     const fetchAttractions = async () => {
       if (city) {
         const response = await fetch(`/api/getAttractions?city=${city}`);
-        console.dir(response);
         const data = await response.json();
         setAttractions(data);
       }
@@ -57,5 +50,17 @@ export default function AttractionsPage() {
         Discover more Cities
       </button>
     </main>
+  );
+}
+
+export default function AttractionsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg">Loading attractions...</p>
+      </div>
+    }>
+      <AttractionsContent />
+    </Suspense>
   );
 }

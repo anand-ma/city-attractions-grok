@@ -11,6 +11,10 @@ export default function Home() {
 
   const handleSubmit = () => {
     try {
+      if (!cityName.trim()) {
+        setError(new Error("Please enter a city name"));
+        return;
+      }
       setShowAttractions(true);
       router.push(`/attractions?city=${cityName}`);
     } catch (err) {
@@ -55,7 +59,7 @@ export default function Home() {
 
         {error && (
           <p className="text-destructive mt-4">
-            An error occurred. Please try again.
+            {error.message}
           </p>
         )}
       </div>
