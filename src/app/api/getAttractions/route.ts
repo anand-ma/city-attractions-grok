@@ -33,8 +33,8 @@ Return only the JSON array and nothing else.`;
 
     return new Response(text);
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Groq API Error:", error);
-    return new Response(`Error fetching attractions: ${error.message}`, { status: 500 });
+    return new Response(`Error fetching attractions: ${error instanceof Error ? error.message : 'Unknown error'}`, { status: 500 });
   }
 }

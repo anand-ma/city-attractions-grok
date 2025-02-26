@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [cityName, setCityName] = useState("");
-  const [showAttractions, setShowAttractions] = useState(false);
-  const [error, setError] = useState(null);
+  const [, setShowAttractions] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
   const router = useRouter();
 
   const handleSubmit = () => {
@@ -14,7 +14,7 @@ export default function Home() {
       setShowAttractions(true);
       router.push(`/attractions?city=${cityName}`);
     } catch (err) {
-      setError(err);
+      setError(err as Error);
     }
   };
 

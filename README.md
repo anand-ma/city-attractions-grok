@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Note
+
+The UI components of this project is created using Grok, later the project is boot startped using nextjs. Claude Sonnet is used to generate fix issues and integrate AI model llama-3.1-8b-instant for generating attractions
+
+## App link
+
+[City Attactions](https://city-attractions-grok.vercel.app/)
+
 ## Getting Started
 
 First, run the development server:
